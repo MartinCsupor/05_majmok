@@ -1,8 +1,9 @@
 module.exports = (objRep) => {
     const { monkeys } = objRep;
     return (req, res, next) => {
-        const deletedMonkeyById = monkeys[res.locals.monkeyIndex];
-        monkeys.splice(res.locals.monkeyIndex, 1);
-        return res.status(200).json({ deletedMonkeyById });
+        const monkeyIndex = monkeys.indexOf(res.locals.monkey);
+        monkeys.splice(monkeyIndex, 1);
+        res.locals.deletedMonkeyById = res.locals.monkey;
+        return next();
     }
 }

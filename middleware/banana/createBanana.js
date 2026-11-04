@@ -13,6 +13,7 @@ module.exports = (objRep) => {
         };
 
         bananas.push(newBanana);
-        return res.status(201).json(newBanana);
+        res.locals.banana = newBanana;
+        return next();
     };
 }

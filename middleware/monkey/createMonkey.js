@@ -11,6 +11,7 @@ module.exports = (objRep) => {
             species: req.body.species
         }
         monkeys.push(newMonkey);
-        return res.status(200).json(newMonkey)
+        res.locals.monkey = newMonkey;
+        return next();
     }
 }

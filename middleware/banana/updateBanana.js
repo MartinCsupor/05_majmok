@@ -1,6 +1,4 @@
 module.exports = (objRep) => {
-    const { bananas } = objRep;
-
     return (req, res, next) => {
         if (typeof req.body.color !== 'undefined') {
             bananas[res.locals.bananaIndex].color = req.body.color;
@@ -15,6 +13,7 @@ module.exports = (objRep) => {
         if ((typeof req.body.color === 'undefined') && (typeof req.body.sweet === 'undefined')) {
             return res.status(400).json({ error: 'Missing color, sweet!' })
         }
-        return res.status(200).json(bananas[res.locals.bananaIndex]);
+        res.locals.banana = banana;
+        return next();
     }
 }

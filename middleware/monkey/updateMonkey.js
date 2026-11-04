@@ -1,7 +1,5 @@
 module.exports = (objRep) => {
 
-    const { monkeys } = objRep;
-
     return (req, res, next) => {
         if (typeof req.body.name !== 'undefined') {
             monkeys[res.locals.monkeyIndex].name = req.body.name;
@@ -18,6 +16,7 @@ module.exports = (objRep) => {
         if ((typeof req.body.name === 'undefined') && (typeof req.body.sex === 'undefined') && (typeof req.body.species === 'undefined')) {
             return res.status(400).json({ error: 'Missing name, sex or species' })
         }
-        return res.status(200).json(monkeys[res.locals.monkeyIndex]);
+        res.locals.monkey = monkey;
+        return next();
     }
 }

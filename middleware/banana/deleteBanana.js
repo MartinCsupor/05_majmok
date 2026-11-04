@@ -2,8 +2,9 @@ module.exports = (objRep) => {
     const { bananas } = objRep;
 
     return (req, res, next) => {
-        const deletedBananaById = bananas[res.locals.bananaIndex];
-        bananas.splice(res.locals.bananaIndex, 1);
-        return res.status(200).json({ deletedBananaById })
+        const bananaIndex = bananas.indexOf(res.locals.banana);
+        bananas.splice(bananaIndex, 1);
+        res.locals.deletedBananaById = res.locals.banana;
+        return next();
     }
 }

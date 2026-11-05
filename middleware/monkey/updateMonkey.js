@@ -4,20 +4,22 @@ module.exports = (objRep) => {
 
     return (req, res, next) => {
 
+        const monkey = res.locals.monkey;
         if (typeof req.body.name !== 'undefined') {
-            res.locals.name = req.body.name;
+            monkey.name = req.body.name;
         }
         if (typeof req.body.sex !== 'undefined') {
-            res.locals.sex = req.body.sex;
+            monkey.sex = req.body.sex;
         }
         if (typeof req.body.species !== 'undefined') {
-            res.locals.species = req.body.species;
+            monkey.species = req.body.species;
         }
         if ((typeof req.body.name === 'undefined') && (typeof req.body.sex === 'undefined') && (typeof req.body.species === 'undefined')) {
             return res.status(400).json({ error: 'Missing name, sex or species' })
         }
 
-        monkeysModel.update(res.locals.monkey);
+        monkeysModel.update(monkey);
+        res.locals.monkey = monkey;
         db.saveDatabase(err => {
             if (err) {
                 return next(err);

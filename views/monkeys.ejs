@@ -15,6 +15,7 @@
                             <th class="px-5 py-3.5 font-semibold" scope="col">Nem</th>
                             <th class="px-5 py-3.5 font-semibold" scope="col">Faj</th>
                             <th class="px-5 py-3.5 text-right font-semibold" scope="col">Banánok</th>
+                            <th class="px-5 py-3.5 font-semibold" scope="col">Műveletek</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-stone-100">
@@ -36,6 +37,10 @@
                                             <%= bananaCount %>
                                         </span>
                                     </td>
+                                    <td class="px-5 py-4 capitalize text-stone-600">
+                                        <a class="rounded-md bg-amber-400 px-4 py-2.5 text-sm font-semibold text-white no-underline transition hover:bg-amber-500"
+                                            href="/editmonkey/<%= monkey.id %>">Szerkeszt</a>
+                                    </td>
                                 </tr>
                                 <% }) %>
                                     <% if (monkeys.length===0) { %>
@@ -50,7 +55,7 @@
         </div>
         <div class="mt-7 border-amber-400">
             <a class="rounded-md bg-emerald-900 px-4 py-2.5 mt-10 text-sm font-semibold text-white no-underline transition hover:bg-emerald-800"
-                href="/newmonkey">New Monkey</a>
+                href="/newmonkey">Új Majom</a>
         </div>
     </main>
     <%- include('footer') %>

@@ -15,12 +15,6 @@ const checkMonkeyId = require('../middleware/banana/checkMonkeyId');
 function addRoutes(app, db, monkeysModel, bananasModel) {
 
     const objRep = {
-        bananas: [
-            { id: 1, color: 'yellow', sweet: false, monkeyId: 1 },
-            { id: 2, color: 'yellow', sweet: true, monkeyId: 1 },
-            { id: 3, color: 'green', sweet: true, monkeyId: 2 },
-            { id: 4, color: 'green', sweet: false, monkeyId: 3 }
-        ],
         db,
         monkeysModel,
         bananasModel,

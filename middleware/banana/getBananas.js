@@ -1,8 +1,8 @@
 module.exports = (objRep) => {
-    const { bananas } = objRep;
+    const { bananasModel } = objRep;
 
     return (req, res, next) => {
-        res.locals.bananas = bananas;
+        res.locals.bananas = bananasModel.find();
         return next();
     }
 }

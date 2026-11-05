@@ -1,19 +1,30 @@
 module.exports = (objRep) => {
+    const { bananasModel, db } = objRep;
+
     return (req, res, next) => {
+        const banana = res.locals.banana;
+
         if (typeof req.body.color !== 'undefined') {
-            bananas[res.locals.bananaIndex].color = req.body.color;
+            banana.color = req.body.color;
         }
         if (typeof req.body.sweet !== 'undefined') {
-            bananas[res.locals.bananaIndex].sweet = req.body.sweet;
+            banana.sweet = req.body.sweet;
         }
         if (typeof req.body.monkeyId !== 'undefined') {
-            bananas[res.locals.bananaIndex].monkeyId = req.body.monkeyId;
+            banana.monkeyId = req.body.monkeyId;
         }
 
-        if ((typeof req.body.color === 'undefined') && (typeof req.body.sweet === 'undefined')) {
+        if ((typeof req.body.color === 'undefined') && (typeof req.body.sweet === 'undefined') && (typeof req.body.monkeyId === 'undefined')) {
             return res.status(400).json({ error: 'Missing color, sweet!' })
         }
+
+        bananasModel.update(banana);
         res.locals.banana = banana;
-        return next();
+        db.saveDatabase(err => {
+            if (err) {
+                return next(err);
+            }
+            return next();
+        });
     }
 }

@@ -17,8 +17,7 @@ module.exports = (objRep) => {
             return res.status(400).json({ error: 'Missing name, sex or species' })
         }
 
-        monkeysModel.update(monkey);
-        res.locals.monkey = monkey;
+        monkeysModel.update(res.locals.monkey);
         db.saveDatabase(err => {
             if (err) {
                 return next(err);

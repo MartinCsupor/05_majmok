@@ -1,11 +1,11 @@
 module.exports = (objRep) => {
-    const { bananas } = objRep;
+    const { bananasModel } = objRep;
 
     return (req, res, next) => {
-        const bananaId = Number(req.params.id);
-        const banana = bananas.find(item => item.id === bananaId);
+        const bananaId = req.params.id;
+        const banana = bananasModel.findOne({ id: bananaId });
 
-        if (!Number.isInteger(bananaId) || banana === undefined) {
+        if (!banana) {
             return res.status(404).json({ error: `Requested bananaID not found! ${req.params.id}` });
         }
 

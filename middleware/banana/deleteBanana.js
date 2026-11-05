@@ -1,10 +1,13 @@
 module.exports = (objRep) => {
-    const { bananas } = objRep;
+    const { bananasModel, db } = objRep;
 
     return (req, res, next) => {
-        const bananaIndex = bananas.indexOf(res.locals.banana);
-        bananas.splice(bananaIndex, 1);
-        res.locals.deletedBananaById = res.locals.banana;
-        return next();
+        bananasModel.remove(res.locals.banana);
+        db.saveDatabase(err => {
+            if (err) {
+                return next(err);
+            }
+            return next();
+        })
     }
 }

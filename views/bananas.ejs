@@ -1,0 +1,43 @@
+<%- include('header') %>
+    <main class="mx-auto max-w-6xl px-5 py-10 sm:py-14">
+        <div class="mb-7 border-l-4 border-amber-400 pl-4">
+            <h1 class="text-3xl font-bold text-emerald-950">Banánok</h1>
+        </div>
+
+        <div class="overflow-hidden rounded-lg border border-stone-200 bg-white shadow-sm">
+            <div class="overflow-x-auto">
+                <table class="w-full min-w-[560px] border-collapse text-left text-sm">
+                    <thead class="bg-emerald-950 text-white">
+                        <tr>
+                            <th class="px-5 py-3.5 font-semibold" scope="col">Szín</th>
+                            <th class="px-5 py-3.5 font-semibold" scope="col">Édes</th>
+                            <th class="px-5 py-3.5 font-semibold" scope="col">Tulajdonos</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-stone-100">
+                        <% bananas.forEach((banana)=> { %>
+                            <% const owner=monkeys.find((monkey)=> monkey.id === banana.monkeyId); %>
+                                <tr class="transition hover:bg-amber-50/70">
+                                    <td class="px-5 py-4 font-semibold text-stone-900">
+                                        <%= banana.color %>
+                                    </td>
+                                    <td class="px-5 py-4 capitalize text-stone-600">
+                                        <%= banana.sweet %>
+                                    </td>
+                                    <td class="px-5 py-4 capitalize text-stone-600">
+                                        <%= owner ? owner.name : '-' %>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                                    <% if (bananas.length===0) { %>
+                                        <tr>
+                                            <td class="px-5 py-10 text-center text-stone-500" colspan="3">Még nincs
+                                                megjeleníthető banán.</td>
+                                        </tr>
+                                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <%- include('footer') %>

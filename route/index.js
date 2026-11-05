@@ -11,6 +11,7 @@ const getBanana = require('../middleware/banana/getBanana');
 const deleteBanana = require('../middleware/banana/deleteBanana');
 const updateBanana = require('../middleware/banana/updateBanana');
 const checkMonkeyId = require('../middleware/banana/checkMonkeyId');
+const renderMW = require('../middleware/render');
 
 function addRoutes(app, db, monkeysModel, bananasModel) {
 
@@ -21,6 +22,8 @@ function addRoutes(app, db, monkeysModel, bananasModel) {
         uuid,
         globalBananaId: 5,
     }
+
+    app.get('/', getMonkeys(objRep), getBananas(objRep), renderMW(objRep, 'index'))
 
     app.get('/api/monkey', getMonkeys(objRep), (req, res) => res.status(200).json(res.locals.monkeys));
     app.post('/api/monkey', createMonkey(objRep), (req, res) => res.status(200).json(res.locals.monkey));

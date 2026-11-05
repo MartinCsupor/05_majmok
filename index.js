@@ -5,6 +5,7 @@ const addRoutes = require('./route/index.js');
 const app = express()
 
 app.use(express.json());
+app.set('view engine', 'ejs');
 
 initDatabase((err, result) => {
     if (err) {

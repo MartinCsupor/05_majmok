@@ -1,5 +1,5 @@
 const loki = require('lokijs');
-const db = new loki('library.db');
+const db = new loki(process.env.DB_FILE || 'majmok.db');
 
 function initDatabase(cb) {
     db.loadDatabase({}, err => {

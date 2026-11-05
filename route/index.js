@@ -11,60 +11,27 @@ const deleteBanana = require('../middleware/banana/deleteBanana');
 const updateBanana = require('../middleware/banana/updateBanana');
 const checkMonkeyId = require('../middleware/banana/checkMonkeyId');
 
-function addRoutes(app) {
+function addRoutes(app, db, monkeysModel, bananasModel) {
 
     const objRep = {
-        monkeys: [
-            {
-                id: 1,
-                name: 'Joe',
-                sex: 'male',
-                species: 'gibbon'
-
-            },
-            {
-                id: 2,
-                name: 'Josephine',
-                sex: 'female',
-                species: 'gorilla'
-            },
-            {
-                id: 3,
-                name: 'Lajos',
-                sex: 'male',
-                species: 'orangutan'
-            }
-        ],
-
-        bananas: [
-            {
-                id: 1,
-                color: "yellow",
-                sweet: false,
-                monkeyId: 1
-            },
-            {
-                id: 2,
-                color: "yellow",
-                sweet: true,
-                monkeyId: 1
-            },
-            {
-                id: 3,
-                color: "green",
-                sweet: true,
-                monkeyId: 2
-            }, {
-                id: 4,
-                color: "green",
-                sweet: false,
-                monkeyId: 3
-            }
-        ],
-
-        globalMonkeyId: 4,
-        globalBananaId: 5,
+            monkeys: [
+                { id: 1, name: 'Joe', sex: 'male', species: 'gibbon' },
+                { id: 2, name: 'Josephine', sex: 'female', species: 'gorilla' },
+                { id: 3, name: 'Lajos', sex: 'male', species: 'orangutan' }
+            ],
+            bananas: [
+                { id: 1, color: 'yellow', sweet: false, monkeyId: 1 },
+                { id: 2, color: 'yellow', sweet: true, monkeyId: 1 },
+                { id: 3, color: 'green', sweet: true, monkeyId: 2 },
+                { id: 4, color: 'green', sweet: false, monkeyId: 3 }
+            ],
+            db,
+            monkeysModel,
+            bananasModel,
+            globalMonkeyId: 4,
+            globalBananaId: 5,
     }
+
     app.get('/monkey', getMonkeys(objRep), (req, res) => res.status(200).json(res.locals.monkeys));
     app.post('/monkey', createMonkey(objRep), (req, res) => res.status(200).json(res.locals.monkey));
     app.get('/monkey/:id', getMonkey(objRep), (req, res) => res.status(200).json(res.locals.monkey));

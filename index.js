@@ -6,8 +6,6 @@ const app = express()
 
 app.use(express.json());
 
-addRoutes(app);
-
 initDatabase((err, result) => {
     if (err) {
         return console.error(err);
@@ -28,7 +26,7 @@ initDatabase((err, result) => {
     });
 
     app.listen(process.env.PORT, function () {
-        console.log(`Server running on http://localhost:3000`)
+        console.log(`Server running on http://localhost:${process.env.PORT}`)
     });
 })
 

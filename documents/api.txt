@@ -34,3 +34,17 @@ DELETE /banana/:id – banán törlése azonosító alapján (DELETE).
  
 Egyéb
 Bármilyen más útvonal vagy metódus – 404-es JSON hiba.
+
+
+Felületi oldalak és middleware-láncok
+
+Oldal / művelet | Felületi cím | API-hívás és middleware-lánc | Szükséges kapcsolódó adat
+
+Majmok listája | /monkeys | GET /api/monkey: getMonkeys; GET /api/banana: getBananas | A banánlista szükséges a majmonkénti banándarabszámhoz. |
+Majom létrehozó űrlap | /monkeys/new | Mentés: POST /api/monkey: createMonkey(objRep) | Nincs további listaadat. |
+Majom szerkesztő űrlap | /monkeys/:id/edit | Betöltés: GET /api/monkey/:id: getMonkey; mentés: PATCH /api/monkey/:id: getMonkey -> updateMonkey(objRep) | A majom adatai a getMonkey láncból érkeznek. |
+Majom törlése | /monkeys listáján, soronkénti művelet | DELETE /api/monkey/:id: getMonkey -> deleteMonkeyBananas(objRep) -> deleteMonkey(objRep) | Előbb a majmot keresi meg, majd törli a hozzá tartozó banánokat és végül a majmot. |
+Banánok listája | /bananas | GET /api/banana: getBananas; GET /api/monkey: getMonkeys | A majomlista kell a gazdanevek megjelenítéséhez. |
+Banán létrehozó űrlap | /bananas/new | Űrlapadat: GET /api/monkey: getMonkeys; mentés: POST /api/banana: checkMonkeyId(objRep) -> createBanana(objRep) | A majomlista adja a gazdaválasztó értékeit és neveit. |
+Banán szerkesztő űrlap | /bananas/:id/edit | Betöltés: GET /api/banana/:id: getBanana és GET /api/monkey: getMonkeys; mentés: PATCH /api/banana/:id: getBanana -> checkMonkeyId(objRep) -> updateBanana(objRep) | A majomlista kell a gazdaválasztóhoz; a getBanana tölti be a banánt. |
+Banán törlése | /bananas listáján, soronkénti művelet | DELETE /api/banana/:id: getBanana -> deleteBanana(objRep) | A törlendő banánt a getBanana keresi meg. |

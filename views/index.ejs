@@ -1,5 +1,22 @@
-<%- include('header', { title: 'Majmok és banánok' }) %>
+<%- include('header') %>
     <main>
         <h1>Majmok és banánok</h1>
+
+        <section id="monkeys">
+            <h2>Majmok</h2>
+            <ul>
+                <% monkeys.forEach((monkey)=> { %>
+                    <li>
+                        <strong>
+                            <%= monkey.name %>
+                        </strong>
+                        <span>
+                            <%= monkey.species %>
+                        </span>
+                        <span>Banánok: <%= bananas.filter((banana)=> banana.monkeyId === monkey.id).length %></span>
+                    </li>
+                    <% }) %>
+            </ul>
+        </section>
     </main>
     <%- include('footer') %>

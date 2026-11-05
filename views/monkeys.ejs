@@ -1,0 +1,50 @@
+<%- include('header') %>
+    <main class="mx-auto max-w-6xl px-5 py-10 sm:py-14">
+        <div class="mb-7 border-l-4 border-amber-400 pl-4">
+            <h1 class="text-3xl font-bold text-emerald-950">Majmok</h1>
+        </div>
+
+        <div class="overflow-hidden rounded-lg border border-stone-200 bg-white shadow-sm">
+            <div class="overflow-x-auto">
+                <table class="w-full min-w-[560px] border-collapse text-left text-sm">
+                    <thead class="bg-emerald-950 text-white">
+                        <tr>
+                            <th class="px-5 py-3.5 font-semibold" scope="col">Név</th>
+                            <th class="px-5 py-3.5 font-semibold" scope="col">Nem</th>
+                            <th class="px-5 py-3.5 font-semibold" scope="col">Faj</th>
+                            <th class="px-5 py-3.5 text-right font-semibold" scope="col">Banánok</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-stone-100">
+                        <% monkeys.forEach((monkey)=> { %>
+                            <% const bananaCount=bananas.filter((banana)=> banana.monkeyId === monkey.id).length; %>
+                                <tr class="transition hover:bg-amber-50/70">
+                                    <td class="px-5 py-4 font-semibold text-stone-900">
+                                        <%= monkey.name %>
+                                    </td>
+                                    <td class="px-5 py-4 capitalize text-stone-600">
+                                        <%= monkey.sex %>
+                                    </td>
+                                    <td class="px-5 py-4 capitalize text-stone-600">
+                                        <%= monkey.species %>
+                                    </td>
+                                    <td class="px-5 py-4 text-right">
+                                        <span
+                                            class="inline-flex min-w-8 justify-center rounded-full bg-amber-100 px-2.5 py-1 font-bold text-amber-950">
+                                            <%= bananaCount %>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                                    <% if (monkeys.length===0) { %>
+                                        <tr>
+                                            <td class="px-5 py-10 text-center text-stone-500" colspan="4">Még nincs
+                                                megjeleníthető majom.</td>
+                                        </tr>
+                                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <%- include('footer') %>

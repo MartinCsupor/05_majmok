@@ -37,15 +37,19 @@
                                             <%= bananaCount %>
                                         </span>
                                     </td>
-                                    <td class="px-5 py-4 capitalize text-stone-600">
-                                        <a class="rounded-md bg-amber-400 px-4 py-2.5 text-sm font-semibold text-white no-underline transition hover:bg-amber-500"
-                                            href="/editmonkey/<%= monkey.id %>">Szerkeszt</a>
+                                    <td class="px-5 py-4">
+                                        <div class="flex flex-wrap items-center gap-2">
+                                            <a class="rounded-md bg-amber-100 px-3 py-2 text-sm font-semibold text-amber-950 no-underline transition hover:bg-amber-200"
+                                                href="/editmonkey/<%= monkey.id %>">Szerkeszt</a>
+                                            <a class="rounded-md px-3 py-2 text-sm font-semibold text-red-700 no-underline transition bg-red-200 hover:bg-red-300 hover:text-red-900"
+                                                href="/deletemonkey/<%= monkey.id %>">Törlés</a>
+                                        </div>
                                     </td>
                                 </tr>
                                 <% }) %>
                                     <% if (monkeys.length===0) { %>
                                         <tr>
-                                            <td class="px-5 py-10 text-center text-stone-500" colspan="4">Még nincs
+                                            <td class="px-5 py-10 text-center text-stone-500" colspan="5">Még nincs
                                                 megjeleníthető majom.</td>
                                         </tr>
                                         <% } %>

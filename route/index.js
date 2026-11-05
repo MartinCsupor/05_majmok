@@ -30,6 +30,7 @@ function addRoutes(app, db, monkeysModel, bananasModel) {
     app.post('/newmonkey', createMonkey(objRep), (req, res) => res.redirect('/'));
     app.get('/editmonkey/:id', getMonkey(objRep), renderMW(objRep, 'editmonkey'));
     app.post('/editmonkey/:id', getMonkey(objRep), updateMonkey(objRep), (req, res) => res.redirect('/monkeys'));
+    app.get('/deletemonkey/:id', getMonkey(objRep), deleteMonkeyBananas(objRep), deleteMonkey(objRep), (req, res) => res.redirect('/monkeys'));
 
     app.get('/api/monkey', getMonkeys(objRep), (req, res) => res.status(200).json(res.locals.monkeys));
     app.post('/api/monkey', createMonkey(objRep), (req, res) => res.status(200).json(res.locals.monkey));

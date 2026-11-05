@@ -25,6 +25,9 @@ function addRoutes(app, db, monkeysModel, bananasModel) {
 
     app.get('/', (req, res) => res.redirect('/monkeys'));
     app.get('/monkeys', getMonkeys(objRep), getBananas(objRep), renderMW(objRep, 'monkeys'));
+    app.get('/bananas', getMonkeys(objRep), getBananas(objRep), renderMW(objRep, 'bananas'));
+    app.get('/newmonkey', getMonkeys(objRep), renderMW(objRep, 'newmonkey'));
+    app.post('/newmonkey', createMonkey(objRep), (req, res) => res.redirect('/'));
 
     app.get('/api/monkey', getMonkeys(objRep), (req, res) => res.status(200).json(res.locals.monkeys));
     app.post('/api/monkey', createMonkey(objRep), (req, res) => res.status(200).json(res.locals.monkey));

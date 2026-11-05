@@ -1,6 +1,5 @@
-
 module.exports = (objRep) => {
-    const { monkeys } = objRep;
+    const { monkeysModel, db } = objRep;
 
     return (req, res, next) => {
         const monkeyId = req.body.monkeyId;
@@ -8,13 +7,12 @@ module.exports = (objRep) => {
         if (monkeyId === undefined || monkeyId === null) {
             return next();
         }
-        // csak egész szám lehet
-        if (!Number.isInteger(monkeyId)) {
-            return res.status(400).json({ error: 'monkeyId must be an integer' });
+        if (typeof monkeyId !== 'string' || monkeyId.length === 0) {
+            return res.status(400).json({ error: 'monkeyId must be a non-empty string' });
         }
         // létezik-e ilyen majom
-        const monkey = monkeys.find(m => m.id === monkeyId);
-        if (monkey === undefined) {
+        const monkey = monkeysModel.findOne({ id: monkeyId });
+        if (!monkey) {
             return res.status(400).json({ error: 'Monkey does not exist' });
         }
         return next();

@@ -21,7 +21,7 @@ initDatabase((err, result) => {
         res.status(404).json({
             error: 'Not found',
             method: req.method,
-            path: req.originalUrl
+            path: req.originalUrlx
         });
     });
 

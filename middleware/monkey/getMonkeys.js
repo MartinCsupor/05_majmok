@@ -1,7 +1,7 @@
 module.exports = (objRep) => {
-    const { monkeys } = objRep;
+    const { monkeysModel } = objRep;
     return (req, res, next) => {
-        res.locals.monkeys = monkeys;
+        res.locals.monkeys = monkeysModel.find();
         return next();
     }
 }

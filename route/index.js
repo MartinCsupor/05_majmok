@@ -1,3 +1,4 @@
+const uuid = require('uuid');
 const getMonkeys = require('../middleware/monkey/getMonkeys');
 const createMonkey = require('../middleware/monkey/createMonkey');
 const getMonkey = require('../middleware/monkey/getMonkey');
@@ -14,22 +15,17 @@ const checkMonkeyId = require('../middleware/banana/checkMonkeyId');
 function addRoutes(app, db, monkeysModel, bananasModel) {
 
     const objRep = {
-            monkeys: [
-                { id: 1, name: 'Joe', sex: 'male', species: 'gibbon' },
-                { id: 2, name: 'Josephine', sex: 'female', species: 'gorilla' },
-                { id: 3, name: 'Lajos', sex: 'male', species: 'orangutan' }
-            ],
-            bananas: [
-                { id: 1, color: 'yellow', sweet: false, monkeyId: 1 },
-                { id: 2, color: 'yellow', sweet: true, monkeyId: 1 },
-                { id: 3, color: 'green', sweet: true, monkeyId: 2 },
-                { id: 4, color: 'green', sweet: false, monkeyId: 3 }
-            ],
-            db,
-            monkeysModel,
-            bananasModel,
-            globalMonkeyId: 4,
-            globalBananaId: 5,
+        bananas: [
+            { id: 1, color: 'yellow', sweet: false, monkeyId: 1 },
+            { id: 2, color: 'yellow', sweet: true, monkeyId: 1 },
+            { id: 3, color: 'green', sweet: true, monkeyId: 2 },
+            { id: 4, color: 'green', sweet: false, monkeyId: 3 }
+        ],
+        db,
+        monkeysModel,
+        bananasModel,
+        uuid,
+        globalBananaId: 5,
     }
 
     app.get('/monkey', getMonkeys(objRep), (req, res) => res.status(200).json(res.locals.monkeys));

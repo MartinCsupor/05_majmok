@@ -3,8 +3,8 @@ Erőforrásaink: majom, banán
  
 Adatok
  
-monkeys (tömb, kezdetben 3 majom)
-  id       – szám, a szerver osztja ki
+monkeys (adatbázis-kollekció)
+  id       – UUID szöveg, a szerver osztja ki
   name     – szöveg, kötelező
   sex      – szöveg, kötelező (pl. male, female)
   species  – szöveg, kötelező (pl. gibbon, gorilla, orangutan)
@@ -13,9 +13,8 @@ bananas (tömb, kezdetben 4 banán)
   id       – szám, a szerver osztja ki
   color    – szöveg, kötelező (pl. yellow, green)
   sweet    – logikai (true / false), kötelező
-  monkeyId – egész szám vagy null; egy létező majom id-ja, null = nincs gazdája
+  monkeyId – UUID szöveg vagy null; egy létező majom id-ja, null = nincs gazdája
  
-globalMonkeyId – a következő kiosztandó majom-id (monkeys.length + 1)
 globalBananaId – a következő kiosztandó banán-id (bananas.length + 1)
 
  
